@@ -1,7 +1,7 @@
 package runtime
 
 import (
-	"github.com/faasflow/sdk/executor"
+	"github.com/Abhishekghosh1998/faasflow-sdk/executor"
 )
 
 type Runtime interface {

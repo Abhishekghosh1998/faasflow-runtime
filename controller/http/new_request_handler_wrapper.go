@@ -6,14 +6,18 @@ import (
 	"net/http"
 	"regexp"
 
-	runtimepkg "github.com/faasflow/runtime"
+	runtimepkg "github.com/Abhishekghosh1998/faasflow-runtime"
 
-	"github.com/faasflow/sdk/executor"
+	"github.com/Abhishekghosh1998/faasflow-sdk/executor"
 	"github.com/julienschmidt/httprouter"
 )
 
 func newRequestHandlerWrapper(runtime runtimepkg.Runtime, handler func(*runtimepkg.Response, *runtimepkg.Request, executor.Executor) error) func(http.ResponseWriter, *http.Request, httprouter.Params) {
+
+	fmt.Println("runtime/controller/http/new_request_handler_wrapper::newRequestHandlerWrapper start")
+	fmt.Println("runtime/controller/http/new_request_handler_wrapper::newRequestHandlerWrapper end")
 	return func(w http.ResponseWriter, req *http.Request, params httprouter.Params) {
+		fmt.Println("Function Returned by newRequestHandlerWrapper start")
 		id := params.ByName("id")
 
 		body, err := ioutil.ReadAll(req.Body)
@@ -62,6 +66,7 @@ func newRequestHandlerWrapper(runtime runtimepkg.Runtime, handler func(*runtimep
 
 		w.WriteHeader(http.StatusOK)
 		w.Write(response.Body)
+		fmt.Println("Function Returned by newRequestHandlerWrapper end")
 	}
 }
 
@@ -71,9 +76,12 @@ var re = regexp.MustCompile(`(?m)^[^:.]+\s*`)
 
 // getWorkflowNameFromHostFromHost returns the flow name from env
 func getWorkflowNameFromHost(host string) string {
+
+	fmt.Println("runtime/controller/http/new_request_handler_wrapper::getWorkflowNameFromHost start")
 	matches := re.FindAllString(host, -1)
 	if matches[0] != "" {
 		return matches[0]
 	}
+	fmt.Println("runtime/controller/http/new_request_handler_wrapper::getWorkflowNameFromHost end")
 	return ""
 }

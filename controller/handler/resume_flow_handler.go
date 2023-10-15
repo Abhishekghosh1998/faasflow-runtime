@@ -2,13 +2,16 @@ package handler
 
 import (
 	"fmt"
-	"github.com/faasflow/runtime"
 	"log"
 
-	"github.com/faasflow/sdk/executor"
+	runtime "github.com/Abhishekghosh1998/faasflow-runtime"
+
+	"github.com/Abhishekghosh1998/faasflow-sdk/executor"
 )
 
 func ResumeFlowHandler(response *runtime.Response, request *runtime.Request, ex executor.Executor) error {
+
+	fmt.Println("runtime/controller/handler/resume_flow_handler::ResumeFlowHandler start")
 	log.Printf("Resuming flow %s for request %s\n", request.FlowName, request.RequestID)
 
 	flowExecutor := executor.CreateFlowExecutor(ex, nil)
@@ -18,5 +21,7 @@ func ResumeFlowHandler(response *runtime.Response, request *runtime.Request, ex 
 	}
 
 	response.Body = []byte("Successfully resumed request " + request.RequestID)
+	fmt.Println("runtime/controller/handler/resume_flow_handler::ResumeFlowHandler end")
+
 	return nil
 }

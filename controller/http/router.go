@@ -1,15 +1,19 @@
 package http
 
 import (
-	"github.com/faasflow/runtime/controller/handler"
+	"fmt"
 	"net/http"
 
-	"github.com/faasflow/runtime"
+	"github.com/Abhishekghosh1998/faasflow-runtime/controller/handler"
+
+	runtime "github.com/Abhishekghosh1998/faasflow-runtime"
 
 	"github.com/julienschmidt/httprouter"
 )
 
 func router(runtime runtime.Runtime) http.Handler {
+
+	fmt.Println("runtime/controller/http/router::router start")
 	router := httprouter.New()
 	// router.POST("/flow/execute", newRequestHandlerWrapper(runtime, handler.ExecuteFlowHandler))
 	router.POST("/flow/:id/forward", newRequestHandlerWrapper(runtime, handler.PartialExecuteFlowHandler))
@@ -19,5 +23,7 @@ func router(runtime runtime.Runtime) http.Handler {
 	router.GET("/flow/:id/state", newRequestHandlerWrapper(runtime, handler.FlowStateHandler))
 	router.POST("/", newRequestHandlerWrapper(runtime, handler.LegacyRequestHandler))
 	router.GET("/", newRequestHandlerWrapper(runtime, handler.LegacyRequestHandler))
+
+	fmt.Println("runtime/controller/http/router::router end")
 	return router
 }

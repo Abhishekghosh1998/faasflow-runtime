@@ -2,12 +2,15 @@ package handler
 
 import (
 	"fmt"
-	"github.com/faasflow/runtime"
-	"github.com/faasflow/sdk/executor"
 	"log"
+
+	runtime "github.com/Abhishekghosh1998/faasflow-runtime"
+	"github.com/Abhishekghosh1998/faasflow-sdk/executor"
 )
 
 func PauseFlowHandler(response *runtime.Response, request *runtime.Request, ex executor.Executor) error {
+
+	fmt.Println("runtime/controller/handler/pause_flow_handler::PauseFlowHandler start")
 	log.Printf("Pausing request %s of flow %s\n", request.RequestID, request.FlowName)
 
 	flowExecutor := executor.CreateFlowExecutor(ex, nil)
@@ -17,6 +20,7 @@ func PauseFlowHandler(response *runtime.Response, request *runtime.Request, ex e
 	}
 
 	response.Body = []byte("Successfully paused request " + request.RequestID)
+	fmt.Println("runtime/controller/handler/pause_flow_handler::PauseFlowHandler end")
 
 	return nil
 }

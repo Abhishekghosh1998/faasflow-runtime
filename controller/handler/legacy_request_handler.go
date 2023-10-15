@@ -1,13 +1,17 @@
 package handler
 
 import (
-	"github.com/faasflow/runtime"
-	"github.com/faasflow/runtime/controller/util"
+	"fmt"
 
-	"github.com/faasflow/sdk/executor"
+	runtime "github.com/Abhishekghosh1998/faasflow-runtime"
+	"github.com/Abhishekghosh1998/faasflow-runtime/controller/util"
+
+	"github.com/Abhishekghosh1998/faasflow-sdk/executor"
 )
 
 func LegacyRequestHandler(response *runtime.Response, request *runtime.Request, ex executor.Executor) error {
+
+	fmt.Println("runtime/controller/handler/legacy_request_handler::LegacyRequestHandler start")
 	var handler func(response *runtime.Response, request *runtime.Request, ex executor.Executor) error
 
 	id := ""
@@ -41,5 +45,7 @@ func LegacyRequestHandler(response *runtime.Response, request *runtime.Request, 
 	}
 
 	err := handler(response, request, ex)
+	fmt.Println("runtime/controller/handler/legacy_request_handler::LegacyRequestHandler end")
+
 	return err
 }

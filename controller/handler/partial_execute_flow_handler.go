@@ -3,12 +3,15 @@ package handler
 import (
 	"errors"
 	"fmt"
-	"github.com/faasflow/runtime"
-	"github.com/faasflow/sdk/executor"
 	"log"
+
+	runtime "github.com/Abhishekghosh1998/faasflow-runtime"
+	"github.com/Abhishekghosh1998/faasflow-sdk/executor"
 )
 
 func PartialExecuteFlowHandler(response *runtime.Response, request *runtime.Request, ex executor.Executor) error {
+
+	fmt.Println("runtime/controller/handler/partial_execute_flow_handler::PartialExecuteFlowHandler start")
 	log.Printf("Partially executing flow %s, for id %s\n", request.FlowName, request.RequestID)
 
 	var stateOption executor.ExecutionStateOption
@@ -30,6 +33,6 @@ func PartialExecuteFlowHandler(response *runtime.Response, request *runtime.Requ
 	}
 
 	response.Body = resp
-
+	fmt.Println("runtime/controller/handler/partial_execute_flow_handler::PartialExecuteFlowHandler end")
 	return nil
 }

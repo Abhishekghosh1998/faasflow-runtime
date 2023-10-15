@@ -6,12 +6,13 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/faasflow/runtime"
+	runtime "github.com/Abhishekghosh1998/faasflow-runtime"
 )
 
 // StartServer starts the flow function
 func StartServer(runtime runtime.Runtime, port int, readTimeout time.Duration, writeTimeout time.Duration) error {
 
+	fmt.Println("runtime/controller/http/start_server::StartServer start")
 	err := runtime.Init()
 	if err != nil {
 		log.Fatal(err)
@@ -25,5 +26,6 @@ func StartServer(runtime runtime.Runtime, port int, readTimeout time.Duration, w
 		MaxHeaderBytes: 1 << 20, // Max header of 1MB
 	}
 
+	fmt.Println("runtime/controller/http/start_server::StartServer end")
 	return s.ListenAndServe()
 }
